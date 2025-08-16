@@ -14,5 +14,5 @@ import java.util.Optional;
 public interface BillRepo extends JpaRepository<Bill , Integer> {
     @Query(value = "Select b FROM Bill b WHERE b.hotelTabel.tabelId = :tabelId AND b.closed = :closed")
     public Optional<Bill> findbyHotelTabelAndClosed(@Param("tabelId") int tabelId ,@Param("closed") boolean closed);
-
 }
+

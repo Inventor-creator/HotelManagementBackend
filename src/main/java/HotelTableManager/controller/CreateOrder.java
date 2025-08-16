@@ -1,11 +1,11 @@
 package HotelTableManager.controller;
 
+import HotelTableManager.model.Bill;
 import HotelTableManager.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class CreateOrder {
@@ -18,6 +18,16 @@ public class CreateOrder {
 
         return orderService.createOrder(tableId , productId);
 
+    }
+
+    @PostMapping("/closeBill")
+    public String closeBillController(@RequestParam Integer tableId){
+        return orderService.closeBill(tableId);
+    }
+
+    @GetMapping("/getBills")
+    public List<Bill> getBillController(){
+        return orderService.getBill();
     }
 
 }

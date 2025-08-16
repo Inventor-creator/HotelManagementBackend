@@ -5,6 +5,8 @@ import HotelTableManager.repos.TableRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TableService {
 
@@ -22,5 +24,10 @@ public class TableService {
             return false;
         }
     }
+
+    public List<HotelTabel> getTables(){
+        return tRepo.findAll();
+    }
+
 
 }

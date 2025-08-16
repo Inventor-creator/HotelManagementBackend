@@ -21,5 +21,4 @@ public class CreateUser {
 
         return user.toString();
     }
-
 }

@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -58,11 +59,33 @@ public class OrderService {
         else{
             return " product dosent exist";
         }
+    }
+
+    public String closeBill(Integer tableId){
+        if(tableRepo.findById(tableId).isEmpty()){
+            return "Enter a valid table id";
+        }
+        if(billRepo.findbyHotelTabelAndClosed(tableId , false).isEmpty()){
+            return "Order something first";
+        }
+        else{
+            Bill billToClose = billRepo.findbyHotelTabelAndClosed(tableId , false).get();
+
+            List<HotelOrder> orders =  orderRepo.findByBillId(billToClose.getBillId());
+            int sum = 0;
+            for(HotelOrder i: orders){
+                sum += i.getProduct().getProductCost();
+            }
+            billToClose.setTotalCost(sum);
+            billToClose.setClosed(true);
+            billRepo.save(billToClose);
+            return "Bill closed successfully, Your total is: $" + sum;
+        }
 
 
-
-
-
+    }
+    public List<Bill> getBill(){
+        return billRepo.findAll();
     }
 
 }
