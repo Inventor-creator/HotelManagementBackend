@@ -17,8 +17,7 @@ public class ProductService {
 
     public Boolean createProduct(Product product){
 
-
-        return pRepo.insert(product);
+        return pRepo.insert( product);
     }
 
 }

@@ -1,23 +1,25 @@
 package HotelTableManager.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Product")
 public class Product {
     @Id
+    @GeneratedValue
+    @Column(name="productId")
     private Integer productId;
+    @Column(name="productName")
     private String productName;
+    @Column(name="productCost")
     private Integer productCost;
 
     public Product() {
 
     }
 
-    public Product(int productId, String productName, int productCost) {
-        this.productId = productId;
+    public Product(String productName, int productCost) {
+
         this.productName = productName;
         this.productCost = productCost;
     }
